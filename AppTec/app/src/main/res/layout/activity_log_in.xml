@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/labelPattern"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textColor="#006600"
+        android:text="@string/cadastro"/>
+    <TableLayout
+        android:layout_marginTop="18dp"
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
+
+        <TableRow>
+            <TextView
+            style="@style/labelPattern"
+            android:text="@string/cad_usuario"/>
+
+            <AutoCompleteTextView
+                android:completionThreshold="1"
+                android:completionHint="@string/hint_cad_nome"
+                style="@style/editPattern"
+                android:id="@+id/edit_cad_nome"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="@string/label_cad_senha"
+                style="@style/labelPattern"/>
+            <EditText style="@style/editPattern"
+                android:id="@+id/edit_cad_senha"
+                android:password="true"
+                />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:id="@+id/btn_login"
+        android:text="@string/btn_login"
+        />
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:id="@+id/cad_radioGroup"
+        >
+        <RadioButton
+            android:id="@+id/ManterConectado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonPattern"
+            android:text="@string/manterConectado"
+            android:checked="true"
+            />
+        <RadioButton
+            android:id="@+id/naoManterConectado"
+            android:layout_width="wrap_content"
+            style="@style/radioButtonPattern"
+            android:layout_height="wrap_content"
+            android:text="Não manter conectado"
+            android:checked="false"/>
+
+    </RadioGroup>
+
+</LinearLayout>

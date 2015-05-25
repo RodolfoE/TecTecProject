@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:stretchColumns="1"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+                <TextView
+                    android:text="@string/relatorio_nome_empresa"
+                    style="@style/labelPattern" />
+                <AutoCompleteTextView
+                    android:id="@+id/edit_nome_empresa"
+                    android:completionHint="nome da empresa"
+                    android:completionThreshold="1"
+                    style="@style/editPattern" />  <!-- Adicionar nome das empresas cadastradas ai -->
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="@string/relatorio_patrimonio"
+                    style="@style/labelPattern" />
+                <EditText
+                    android:id="@+id/edit_patrimonio"
+                    style="@style/editPattern"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:text="@string/relatorio_ordem_manutencao"
+                    style="@style/labelPattern" />
+                <EditText
+                    android:id="@+id/edit_ordem_manutencao"
+                    style="@style/editPattern"
+                    android:inputType="number"
+                    />
+            </TableRow>
+
+        </TableLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/labelPattern"
+            android:textColor="#006600"
+            android:gravity="center"
+            android:text="Observação"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            style="@style/editPattern"/>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="right"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:text="@string/btn_add_foto"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_salvar_relatorio"
+                android:layout_gravity="right"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/labelPattern"
+        android:gravity="center"
+        android:id="@+id/titulo"
+        android:layout_marginBottom="10dp"
+        android:textSize="25dp"
+        android:textColor="#006600"
+        android:text="@string/titulo_cadastro"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/labelPattern"
+        android:layout_below="@id/titulo"
+        android:textSize="30dp"
+        android:id="@+id/label_nome"
+        android:textStyle="bold"
+        android:text="@string/cadastro_nome"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/editPattern"
+        android:id="@+id/edit_cadastro_nome"
+        android:layout_alignBaseline="@id/label_nome"
+        android:layout_toRightOf="@id/label_nome"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/labelPattern"
+        android:textSize="30dp"
+        android:id="@+id/label_senha"
+        android:textStyle="bold"
+        android:layout_below="@id/label_nome"
+        android:text="@string/cadastro_senha"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/editPattern"
+        android:id="@+id/edit_cadastro_senha"
+        android:layout_alignBaseline="@id/label_senha"
+        android:layout_toRightOf="@id/label_nome"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/labelPattern"
+        android:id="@+id/label_digiteArea"
+        android:text="@string/label_digiteArea"
+        android:layout_below="@+id/label_senha"
+        android:gravity="center"
+        android:layout_centerHorizontal="true" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/cad_area"
+        android:id="@+id/spinner1"
+        android:layout_below="@+id/label_digiteArea"
+        ></Spinner>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_salvar"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/spinner1"/>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,9 @@
+1. tab - Relatório fotográfico
+    - Adicionar fotos.
+    - Tab para visualização de fotos, podendo excluir alguma.
+2. tab - Adicionar equipamento
+3. tab - Buscar relatório.
+    - Mostrar numa lista, e quando clicado, aparece todos os dados deste relatório, podendo ver as fotos também.
+4. Adicionar empresa. (guardar no BD)
+5. Adicionar funcionário (guardar no BD)
+6. Fazer lógica de voltar e dar kill em activities que não estão sendo usadas.
