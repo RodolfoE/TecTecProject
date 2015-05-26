@@ -12,7 +12,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity android:name=".MainMenu" />
-        <activity android:name=".Cadastro" />
+        <activity android:name=".EmployeeRegistration" />
         <activity android:name=".Laucher" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

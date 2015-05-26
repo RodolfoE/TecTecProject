@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
-import android.widget.Toast;
 
 public class Laucher extends TabActivity {
 
@@ -24,9 +23,9 @@ public class Laucher extends TabActivity {
         tab2.setContent(new Intent(this, LogIn.class));
         tabHost.addTab(tab2);
 
-        TabHost.TabSpec tab1 = tabHost.newTabSpec("Cadastro");
-        tab1.setIndicator("Cadastro");
-        tab1.setContent(new Intent(this, Cadastro.class));
+        TabHost.TabSpec tab1 = tabHost.newTabSpec("cadastro");
+        tab1.setIndicator("cadastro");
+        tab1.setContent(new Intent(this, EmployeeRegistration.class));
         tabHost.addTab(tab1);
 
 

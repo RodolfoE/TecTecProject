@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         style="@style/editPattern"
         android:id="@+id/edit_cadastro_senha"
+        android:inputType="textPassword"
         android:layout_alignBaseline="@id/label_senha"
         android:layout_toRightOf="@id/label_nome"/>
 
@@ -69,6 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_salvar"
+        android:id="@+id/btn_save_registration"
         android:layout_alignParentRight="true"
         android:layout_below="@id/spinner1"/>
 
