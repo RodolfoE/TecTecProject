@@ -12,11 +12,12 @@ public class Laucher extends TabActivity {
 
     public static final int ADD_NOME_EMPRESA = 1;
     AlertDialog.Builder dialog;
+    TabHost tabHost;
 
     protected void onCreate(Bundle bundle){
         super.onCreate(bundle);
 
-        TabHost tabHost = getTabHost();
+        tabHost = getTabHost();
 
         TabHost.TabSpec tab2 = tabHost.newTabSpec("Log in");
         tab2.setIndicator("Log In");
@@ -30,7 +31,9 @@ public class Laucher extends TabActivity {
 
 
     }
-
+    public void changeToTab(int i){
+        tabHost.setCurrentTab(i);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_register_enterprise, menu);

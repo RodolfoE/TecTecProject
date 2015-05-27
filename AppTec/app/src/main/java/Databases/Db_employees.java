@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ArrayAdapter;
+
 import java.util.ArrayList;
 
 import db_Lines.Employee;
@@ -12,6 +14,9 @@ import db_Lines.Employee;
  * Created by Rodolfo on 26/05/2015.
  */
 public class Db_employees {
+
+    // database arguments order:  Name, Area, Password
+
     public static final String DB_NAME = "TecTecDB";
     public static final String TABLE_NAME = "Employee";
 
@@ -47,6 +52,19 @@ public class Db_employees {
         return retorner;
     }
 
+    public ArrayList<Employee> getAllEmployee(){
+        ArrayList<Employee> retornadoror = new ArrayList<Employee>();
+
+        Cursor cursor = mDb.query(TABLE_NAME, null, null, null, null, null, null, null);
+        cursor.moveToFirst();
+
+        while (cursor.moveToNext()){
+            Employee employee = new Employee(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+            retornadoror.add(employee);
+        }
+        return retornadoror;
+    }
+
     public Employee getEmployeeByName(String name){
         Cursor cursor = mDb.query(TABLE_NAME, null, name, null, null, null, null, null);
         cursor.moveToFirst();
@@ -55,7 +73,7 @@ public class Db_employees {
         return retorner;
     }
 
-    public boolean existsEmployee(String name){
+    public boolean ContainsEmployee(String name){
         Cursor cursor = mDb.query(TABLE_NAME, new String[]{COLUMN_NAME}, COLUMN_NAME + "='" + name + "'", null, null, null, null);
         return (cursor.moveToFirst());
     }
@@ -67,6 +85,18 @@ public class Db_employees {
         values.put(COLUMN_PASSWORD, employee.getPassword());
         mDb.insert(TABLE_NAME, null, values);
         return true;
+    }
+
+    public boolean verifyLogIn(Employee employee){
+        Cursor cursor = mDb.query(TABLE_NAME, new String[]{COLUMN_NAME, COLUMN_PASSWORD}, null, null, null, null, null);
+        cursor.moveToFirst();
+
+        while (cursor.moveToNext()){
+            if (cursor.getString(0) == employee.getName() && cursor.getString(1) == employee.getPassword()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void close(){

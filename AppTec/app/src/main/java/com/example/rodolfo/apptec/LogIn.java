@@ -3,6 +3,7 @@ package com.example.rodolfo.apptec;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -13,11 +14,18 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import Databases.Db_employees;
+import db_Lines.Employee;
+
 public class LogIn extends Activity {
-    private String[] mNome_Usuarios = {"Jose", "Maria", "Joao", "Barbara", "Lucimar"};
+    public static final String FileName = "SharedForRadioButton";
+
     private static final String ERRO = "EXCEPTIONS";
     ProgressDialog dialog;
     EditText  mEdit_senha;
@@ -27,60 +35,129 @@ public class LogIn extends Activity {
     ProgressBar progressBar;
     int mProgresso = 0, mMax = 100;
     Handler handler = new Handler();
-
+    SharedPreferences preferences;
+    Db_employees mDbEmployee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        radioGroup = (RadioGroup) findViewById(R.id.cad_radioGroup);
+        setAutoCompleteTextView();
+        setRadioGroup();
+        setLoggin();
+    }
 
-        mEdit_nome = (AutoCompleteTextView) findViewById(R.id.edit_cad_nome);
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mNome_Usuarios);
-        mEdit_nome.setAdapter(adapter);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //For each time the user get back to this activity, the database will be rechecked, and if any update had been done, it'll populate the autocomplete once again.
+        setAutoCompleteTextView();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mDbEmployee.close();
+    }
+
+    private void setLoggin() {
         mEdit_senha = (EditText) findViewById(R.id.edit_cad_senha);
         mBtn_login = (Button) findViewById(R.id.btn_login);
         mBtn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.maintheme);
-                verificarEntrada();
-                startActivity(new Intent(LogIn.this, MainMenu.class));
+                if (verificarEntrada())
+                    startActivity(new Intent(LogIn.this, MainMenu.class));
             }
         });
     }
 
+    private void setRadioGroup() {
+        preferences= getSharedPreferences(FileName, 0);
+
+        if (preferences.contains("currentChecked")) {
+            if (preferences.getBoolean("currentChecked", false)) {
+                ((RadioButton) this.findViewById(R.id.ManterConectado)).setChecked(true);
+            } else {
+                ((RadioButton) this.findViewById(R.id.naoManterConectado)).setChecked(true);
+            }
+        }
+
+        radioGroup = (RadioGroup) findViewById(R.id.cad_radioGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                SharedPreferences.Editor edit = preferences.edit();
+
+                if (checkedId == R.id.ManterConectado) {
+                    edit.putBoolean("currentChecked", true);
+
+                } else {
+                    edit.putBoolean("currentChecked", false);
+                }
+                edit.commit();
+            }
+        });
+    }
+
+    private void setAutoCompleteTextView() {
+        mDbEmployee = new Db_employees(this);
+        mEdit_nome = (AutoCompleteTextView) findViewById(R.id.edit_cad_nome);
+        ArrayList<Employee> employees = mDbEmployee.getAllEmployee();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+
+        for (Employee i : employees){
+            adapter.add(i.getName());
+        }
+        mEdit_nome.setAdapter(adapter);
+    }
+
+    //mudar essa lógica dps
+    boolean flag = false;
     private boolean verificarEntrada(){
+
+
 
         new Thread(){
             @Override
             public void run() {
                 progressBar = (ProgressBar) findViewById(R.id.barra_de_progresso);
                 try {
-                    while (mProgresso < mMax) {
-                        Thread.sleep(2000);
-                        mProgresso = addProgresso(mProgresso);
+                    String name = mEdit_nome.getText().toString();
+                    String password = mEdit_senha.getText().toString();
 
+                    if (mDbEmployee.verifyLogIn(new Employee(name, password, null)))
+                    {
+                        flag = true;
+                        setContentView(R.layout.maintheme);
+                        while (mProgresso < mMax) {
+                            Thread.sleep(2000);
+                            mProgresso = addProgresso(mProgresso);
+
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressBar.setProgress(mProgresso);
+                                }
+                            });
+                        }
+                    } else {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                progressBar.setProgress(mProgresso);
+                                Toast.makeText(LogIn.this, "Usuário não existe", Toast.LENGTH_LONG).show();
+                                flag = false;
                             }
                         });
                     }
-                } catch(InterruptedException ex){
+                } catch(Exception ex){
                     Log.e(ERRO, ex.getMessage());
                 }
             }
         }.start();
 
-        if (R.id.ManterConectado == radioGroup.getCheckedRadioButtonId())
-            Toast.makeText(this, "Você escolheu se manter conectado!", Toast.LENGTH_SHORT).show();
-
-        return true;
+        return flag;
     }
 
     private int addProgresso(int progresso){
