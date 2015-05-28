@@ -52,29 +52,16 @@ public class EmployeeRegistration extends Activity {
 
                 Employee employee = new Employee(nome, senha, area);
 
-                if (mDb_employees.ContainsEmployee(nome)) {
+                if (mDb_employees.existsEmployee(nome)){
                     Toast.makeText(EmployeeRegistration.this, "Nome de usuário já existe\nInsira outro nome", Toast.LENGTH_LONG).show();
                 } else {
                     mDb_employees.insertEmployee(employee);
-                    Toast.makeText(EmployeeRegistration.this, "Cadastro realizado com sucesso", Toast.LENGTH_LONG).show();
                 }
-                switchTabInActivity(0);
             }
         });
     }
 
-    public void switchTabInActivity(int indexTabToSwitchTo){
-        Laucher act = (Laucher) this.getParent();
-        act.changeToTab(indexTabToSwitchTo);
-    }
-
     private void instantiateDataBase() {
         mDb_employees = new Db_employees(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mDb_employees.close();
     }
 }
