@@ -33,25 +33,12 @@ public class Laucher extends TabActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_register_enterprise, menu);
-        MenuItem add_nome_empresa = menu.add(0, ADD_NOME_EMPRESA, 0, "Add Empresa");
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        switch (id)
-        {
-            case ADD_NOME_EMPRESA:
-                dialog = new AlertDialog.Builder(this);
-                dialog.setTitle("Digite o nome da empresa");
-                dialog.setIcon(R.drawable.icon_tec);
-                dialog.show();
-                break;
-
-        }
         return super.onOptionsItemSelected(item);
     }
 }

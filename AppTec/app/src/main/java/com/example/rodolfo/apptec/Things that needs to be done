@@ -1,9 +1,25 @@
-1. tab - Relatório fotográfico
-    - Adicionar fotos.
-    - Tab para visualização de fotos, podendo excluir alguma.
-2. tab - Adicionar equipamento
+*. Adicionar lógica para quando add empresa, esta vai para o autocompleteEditText (colocando no db ou no txt)
+*. Criar activity para visualização de fotos, podendo excluir alguma (obs: a partir da tela relatório)
+*. Corrigir textos com caracteres errados.
+
 3. tab - Buscar relatório.
     - Mostrar numa lista, e quando clicado, aparece todos os dados deste relatório, podendo ver as fotos também.
 4. Adicionar empresa. (guardar no BD)
 5. Adicionar funcionário (guardar no BD)
 6. Fazer lógica de voltar e dar kill em activities que não estão sendo usadas.
+
+*. Ver problema com login
+    obs: ta entrando sem senha ou nome.
+*. Adicionar fotos.
+*. Fazer lógica de voltar para alguma activity (quando pressiono voltar, da zebra pois não dei finish() na passada)
+*. Adiciona condição na classe RelatorioFot, método addPath
+
+
+
+Proj: Db_phot_report
+* Finish Implementation there.
+* add way of saving who made the photography report
+
+
+Proj: PhotReport
+* Change that to english

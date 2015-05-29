@@ -3,6 +3,7 @@ package com.example.rodolfo.apptec;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
@@ -47,13 +48,29 @@ public class MainMenu extends TabActivity {
 
         switch (id){
             case MENU_ADD_ENTERPRISE:
-                dialog = new AlertDialog.Builder(this);
-                dialog.setTitle("Digite o nome da empresa");
-                dialog.setIcon(R.drawable.icon_tec);
-                dialog.show();
+                setDialogFeturesAndShow();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void setDialogFeturesAndShow(){
+        dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+
+        dialog.setView(inflater.inflate(R.layout.dialog_layout, null)).
+                setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // adicionar empresa no DB
+                    }
+                });
+        dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do fucking nothing
+            }
+        });
+        dialog.show();
     }
 
 }

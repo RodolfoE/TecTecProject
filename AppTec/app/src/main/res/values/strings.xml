@@ -31,4 +31,6 @@
     <string name="title_activity_cadastro_empresa">Cadastro_empresa</string>
     <string name="title_activity_search_for_report">SearchForReport</string>
     <string name="menu_add_new_enterprise">Add Empresa</string>
+    <string name="dialog_name_enterprise">Nome da empresa</string>
+    <string name="dialog_text_name">Entre com o nome da empresa</string>
 </resources>
