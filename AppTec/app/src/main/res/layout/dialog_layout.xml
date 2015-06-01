@@ -22,7 +22,7 @@
         android:hint="@string/dialog_name_enterprise"
         android:layout_width="match_parent"
         style="@style/editPattern"
-        android:id="@+id/dialog_name_enterprise"
+        android:id="@+id/edit_dialog_name_enterprise"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

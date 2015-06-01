@@ -5,13 +5,18 @@ import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.Toast;
+
+import Databases.Db_phot_report;
 
 public class MainMenu extends TabActivity {
     public static final int MENU_ADD_ENTERPRISE = 1;
@@ -56,12 +61,16 @@ public class MainMenu extends TabActivity {
     public void setDialogFeturesAndShow(){
         dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_layout, null);
+        final EditText txt = (EditText) v.findViewById(R.id.edit_dialog_name_enterprise);
 
-        dialog.setView(inflater.inflate(R.layout.dialog_layout, null)).
+        dialog.setView(v).
                 setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // adicionar empresa no DB
+                        Db_phot_report report = new Db_phot_report(MainMenu.this);
+                        report.insertEnterprise(txt.getText().toString());
+                        report.close();
                     }
                 });
         dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
