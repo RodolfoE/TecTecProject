@@ -12,8 +12,6 @@ import db_Lines.PhotReport;
  */
 public class Db_phot_report {
     public static final String DB_NAME = Db_employees.DB_NAME;
-<<<<<<< HEAD
-=======
     public static final String TABLE_ENTERPRISE_NAME = "PhotoReport"; // enterpriseId auto-increments - COLUMN NAME ENTERPRISE
     public static final String COLUMN_NAME_ENTERPRISE = "NameEnterprise";
     public static final String COLUMN_ENTERPRISE_ID = "EnterpriseId";
@@ -26,42 +24,13 @@ public class Db_phot_report {
 
     public static final String TABLE_PHOTOS = "Photos_from_reports"; // foreing key from TABLE_REPORTs - Photos from the report
     public static final String COLUMN_PHOTOS = "Photos";
->>>>>>> origin/master
 
-    SQLiteDatabase mDb_enterprises;
-
-    public static final String TABLE_ENTERPRISES = "report";
-    public static final String COLUMN_NAME_ENTERPRISE = "Name_enterprise";
-
-    public static final String TABLE_REPORTS = "reports";
-    public static final String COLUMN_PAT_NUMBER = "Pat_number";
-    public static final String COLUMN_REPORT_NUMBER = "Name_enterprise";
-    public static final String CODE_ENTERPRISE = "codeEnterprise";
-
-    public static final String TABLE_PHOTOS = "PathToPhotos";
-    public static final String COLUMN_PATH = "reportPaths";
-    public static final String CODE_REPORT = "codigoRelatorio";
+    SQLiteDatabase mDatabase;
     Context mCtx;
 
     public Db_phot_report(Context ctx){
         this.mCtx = ctx;
-<<<<<<< HEAD
 
-        mDb_enterprises = ctx.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
-
-        mDb_enterprises.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_ENTERPRISES +
-                " ( '" + COLUMN_NAME_ENTERPRISE + "' varchar(100), " +
-                " '" + CODE_ENTERPRISE + "' ," +
-                "Primary key('" + COLUMN_NAME_ENTERPRISE + "' );");
-
-        mDb_enterprises.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_REPORTS +
-                " ( '" + COLUMN_REPORT_NUMBER + "' varchar(100), '" +
-                 COLUMN_PAT_NUMBER + "' varchar(100) );");
-
-        mDb_enterprises.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PHOTOS  + " ('" + COLUMN_PATH + "' varchar(200)," +
-                "'" + CODE_REPORT);
-
-=======
         mDatabase = ctx.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
 
         mDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_ENTERPRISE_NAME +
@@ -103,7 +72,7 @@ public class Db_phot_report {
         Cursor cursor = mDatabase.query(TABLE_REPORTS, null, COLUMN_PAT_NUMBER + " = " + photReport.getmNumPat() + " AND " + COLUMN_REPORT_NUMBER + " = " + photReport.getmNumOrdemManutencao(), null, null, null, null);
         cursor.moveToFirst();
         return cursor.getInt(0);
->>>>>>> origin/master
+
     }
 
     public boolean addReport(PhotReport photReport){
@@ -112,18 +81,16 @@ public class Db_phot_report {
             insertEnterprise(photReport.getmNomeEmpresa());
         }
         ContentValues values = new ContentValues();
-<<<<<<< HEAD
         values.put(COLUMN_NAME_ENTERPRISE, photReport.getmNomeEmpresa());
         values.put(COLUMN_REPORT_NUMBER, photReport.getmNumOrdemManutencao());
         values.put(COLUMN_PAT_NUMBER, photReport.getmNumPat());
-        mDb_enterprises.insert(TABLE_ENTERPRISES, null, values);
+        //mDatabase.insert(TABLE_ENTERPRISES, null, values);
         return true;
     }
 
     public boolean deleteReport(){
-=======
         //values.put();
->>>>>>> origin/master
+
         return true;
     }
     public void close(){
